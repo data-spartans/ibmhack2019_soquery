@@ -1,18 +1,7 @@
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-
-class Query():
-    def __init__(self, intitle="", tags="", sortby="", id=None):
-        self.intitle = intitle
-        self.tags = tags
-        self.sortby = sortby
-
-class Answer():
-    def __init__(self, question_text="", accepted=False, votes="", url="", id=None):
-        self.question_text = question_text
-        self.accepted = accepted
-        self.votes = votes
+from base import Query
 
 class QueryGenerator():
     def __init__(self, base_query=""):
