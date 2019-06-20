@@ -40,12 +40,12 @@ class QueryGenerator():
 
     def generate(self):
         queries = []
-        queries.append(Query(intitle=self.base_query))
+        queries.append(Query(q = self.base_query))
         tokenized_base = self.tokenize(self.base_query)
         no_puncts = self.remove_punctuations(tokenized_base)
         no_stopwords = self.remove_stopwords(no_puncts)
-        queries.append(Query(intitle = self.detokenize(no_puncts)))
-        queries.append(Query(intitle = self.detokenize(no_stopwords)))
+        queries.append(Query(q = self.detokenize(no_puncts)))
+        queries.append(Query(q = self.detokenize(no_stopwords)))
         return queries
 
 if __name__ == '__main__':
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     qgen = QueryGenerator(q)
     alternates = qgen.generate()
     for q in alternates:
-        print(q.intitle)
+        print(q.q)
 

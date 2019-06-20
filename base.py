@@ -1,14 +1,15 @@
 class Query():
-    def __init__(self, intitle="", tags="", sortby=""):
-        self.intitle = intitle
-        self.tags = tags
-        self.sortby = sortby
+    def __init__(self, q="", title="", tagged=None, sort=None):
+        self.q = q
+        self.title = title
+        self.tagged = tagged
+        self.sort = sort
 
 class CandidateAnswer():
     def __init__(self, ID=None, question_id=None, question_text = "", \
-                 accepted=False, votes=None):
+                 accepted=False, score=None):
         self.question = question
-        self.votes = votes
+        self.score = score
         self.accepted = accepted
         self.ID = ID
         self.confidence = 0
