@@ -13,8 +13,8 @@ def jaccard_similarity(t1, t2):
     words1 = word_tokenize(t1)
     words2 = word_tokenize(t2)
     
-    words1 = [ps.stem(w) for w in words1]
-    words2 = [ps.stem(w) for w in words2]
+    #words1 = [ps.stem(w) for w in words1]
+    #words2 = [ps.stem(w) for w in words2]
 
     set1 = set(words1)
     set2 = set(words2)
@@ -32,15 +32,14 @@ def overall_confidence(query, candidate):
 
     Basically, the answer's score and acceptance act as weights for the similarity + relevance.
     '''
-    sim = jaccard_similarity(query, candidate.question_text)
+    sim = jaccard_similarity(query, candidate.question_title)
     rel = candidate.relevance
     scr = int(candidate.info['score'])
     acc = None
 
-    # we take acceptance of answer being equivalent to 100 upvotes
-    if candidate.info['is_accepted'] == 'true': acc = 100
+    # we take acceptance of answer being equivalent to 20 upvotes
+    if candidate.info['is_accepted'] == 'true': acc = 20
     else: acc = 0
     
     return (scr + acc) * (sim + 1/rel)
-
 

@@ -9,10 +9,12 @@ class Query():
         self.sort = sort
 
 class CandidateAnswer():
-    def __init__(self, info={}, question=None):
+    def __init__(self, info={}, question_title=None, relevance=None):
         self.info = info
         self.confidence = 0
         self.body = ''
+        self.question_title = question_title
+        self.relevance = relevance
 
     def fetch_body(self):
         ''' 
