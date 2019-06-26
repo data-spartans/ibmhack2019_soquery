@@ -21,11 +21,26 @@ def jaccard_similarity(t1, t2):
 
     return len(set1.intersection(set2))/len(set1.union(set2))
 
+def overall_confidence(query, candidate):
+    '''
+    Returns overall confidence in an answer based on a (currently ad-hoc) formula. The main factors that influence the confidence are:
 
-if __name__ == '__main__':
-    t1 = input('Enter first sentence: ')
-    t2 = input('Enter second sentence: ')
+        * The similarity of its question to original query
+        * How far up it's question is in the search results (i.e relevance)
+        * The answer's score/upvotes
+        * Whether the answer is accepted
 
-    print('Similarity:', jaccard_similarity(t1, t2))
+    Basically, the answer's score and acceptance act as weights for the similarity + relevance.
+    '''
+    sim = jaccard_similarity(query, candidate.question_text)
+    rel = candidate.relevance
+    scr = int(candidate.info['score'])
+    acc = None
+
+    # we take acceptance of answer being equivalent to 100 upvotes
+    if candidate.info['is_accepted'] == 'true': acc = 100
+    else: acc = 0
+    
+    return (scr + acc) * (sim + 1/rel)
 
 
