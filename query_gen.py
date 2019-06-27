@@ -4,8 +4,8 @@ from nltk.tokenize import word_tokenize
 from base import Query
 
 class QueryGenerator():
-    def __init__(self, base_query=""):
-        self.base_query = base_query
+    def __init__(self):
+        pass
 
     def tokenize(self, text):
         sentences = sent_tokenize(text)
@@ -38,14 +38,18 @@ class QueryGenerator():
     def detokenize(self, tokenized_text):
         return ' '.join([' '.join(sent) for sent in tokenized_text])
 
-    def generate(self):
+    def generate(self, base_query):
         queries = []
-        queries.append(Query(q = self.base_query))
-        tokenized_base = self.tokenize(self.base_query)
+
+        queries.append(Query(q = base_query))
+
+        tokenized_base = self.tokenize(base_query)
         no_puncts = self.remove_punctuations(tokenized_base)
         no_stopwords = self.remove_stopwords(no_puncts)
+
         queries.append(Query(q = self.detokenize(no_puncts)))
         queries.append(Query(q = self.detokenize(no_stopwords)))
+        queries.append(Query(title = self.detokenize(no_stopwords)))
         return queries
 
 if __name__ == '__main__':

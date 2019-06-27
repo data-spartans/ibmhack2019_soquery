@@ -3,8 +3,8 @@ from api_handling import SOHandler
 from ranking import overall_confidence
 
 query = input('Enter query: ')
-qgen = QueryGenerator(query)
-query_list = qgen.generate()
+qgen = QueryGenerator()
+query_list = qgen.generate(query)
 
 so = SOHandler()
 answers = so.get_answers(query_list)
