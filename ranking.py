@@ -10,11 +10,11 @@ def jaccard_similarity(t1, t2):
     # First stem the words in the strings, 
     # then convert to set and take intersection
     ps = PorterStemmer()
-    words1 = word_tokenize(t1)
-    words2 = word_tokenize(t2)
+    words1 = word_tokenize(t1.lower())
+    words2 = word_tokenize(t2.lower())
     
-    #words1 = [ps.stem(w) for w in words1]
-    #words2 = [ps.stem(w) for w in words2]
+    words1 = [ps.stem(w) for w in words1]
+    words2 = [ps.stem(w) for w in words2]
 
     set1 = set(words1)
     set2 = set(words2)
@@ -41,5 +41,6 @@ def overall_confidence(query, candidate):
     if candidate.info['is_accepted'] == 'true': acc = 20
     else: acc = 0
     
-    return (scr + acc) * (sim + 1/rel)
+    # similarity to original query is highly valued
+    return (scr + acc) * (sim + 1/rel) + 500 * sim
 
