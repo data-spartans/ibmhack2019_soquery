@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.search {
+  width: 40%;
+  height: 36px;
+  margin: 20px auto;
+}
+
+.search form {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.searchTerm {
+  width: 80%;
+  height: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  padding-left: 5px;
+  outline: none;
+  color: #9DBFAF;
+  box-shadow: 2px 0px 0 0px #00B4CC;
+
+}
+
+.searchTerm:focus{
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 20%;
+  height: 100%;
+  border: 1px solid #00B4CC;
+  border-left: none;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  display: block;
+  float: right;
+  outline: none;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.answer-display {
+    display: block;
+    max-width: 900px;
+    margin: 0 auto;
+    background: #ffffff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+.question {
+    margin: 0;
+    padding: 15px;
+    display: block;
+    font-size: 120%;
+    font-weight: bold;
+    color: #ffffff;
+}
+.answer {
+    padding: 15px;
+}

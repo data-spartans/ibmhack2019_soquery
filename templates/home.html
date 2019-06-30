@@ -1,0 +1,23 @@
+<html>
+<head>
+<title>Stack Overflow
+</title>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+<link rel="icon" type="image/png" href="icon.png"/>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+</style>
+</head>
+<body>
+<div class="wrap">
+    <div class="search">
+        <form action="/search">
+            <input name="query" type="text" class="searchTerm" placeholder="Enter your query!"/>
+                <button type="submit" class="searchButton">
+                    <b class="query-search">Search</b>
+                </button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
