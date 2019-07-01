@@ -1,7 +1,7 @@
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from base import Query
+from .base import Query
 
 class QueryGenerator():
     def __init__(self):

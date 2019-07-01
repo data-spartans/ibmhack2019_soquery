@@ -2,10 +2,10 @@ import urllib
 
 from flask import Flask, render_template, request, url_for
 
-from api_handling import SOHandler
 from config import API_KEY
-from query_gen import QueryGenerator
-from ranking import overall_confidence
+from core.api_handling import SOHandler
+from core.query_gen import QueryGenerator
+from core.ranking import overall_confidence
 from utils import color_for_confidence
 
 qgen = QueryGenerator()

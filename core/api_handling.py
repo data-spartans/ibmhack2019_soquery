@@ -1,7 +1,7 @@
 import stackexchange
 import requests
-from base import CandidateAnswer
-from base import Query
+from .base import CandidateAnswer
+from .base import Query
 
 class SOHandler():
     def __init__(self, api_key=None):
@@ -59,7 +59,6 @@ class SOHandler():
                 ids += '%3B'
 
         final_url = api_url + ids + query_options + key_param
-        print('final_url:', final_url)
         req = requests.get(final_url)
         if req.status_code != 200:
             print(req.status_code, '- Error while fetching data!')

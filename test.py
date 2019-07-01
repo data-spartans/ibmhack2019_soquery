@@ -1,7 +1,7 @@
-from query_gen import QueryGenerator
-from api_handling import SOHandler
+from core.query_gen import QueryGenerator
+from core.api_handling import SOHandler
+from core.ranking import overall_confidence
 from config import API_KEY
-from ranking import overall_confidence
 
 query = input('Enter query: ')
 qgen = QueryGenerator()
