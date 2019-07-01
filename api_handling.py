@@ -6,7 +6,9 @@ from base import Query
 class SOHandler():
     def __init__(self, api_key=None):
         self.api_key = api_key
-        self.so = stackexchange.Site(stackexchange.StackOverflow)
+        self.so = stackexchange.Site(stackexchange.StackOverflow, self.api_key)
+        self.so.impose_throttling = True
+        self.so.throttle_stop = False
         self.QS_PER_QUERY = 10         
         # ^ no of questions to consider for each query
 
@@ -40,6 +42,10 @@ class SOHandler():
         answers = []
         api_url = 'https://api.stackexchange.com/2.2/questions/'
         query_options = '/answers?order=desc&sort=votes&site=stackoverflow'
+        key_param = ''
+        if self.api_key:
+            key_param='&key=%s' % (self.api_key)
+
         ids = ''
         questions, qindex = self.search_queries(query_list)
 
@@ -52,7 +58,8 @@ class SOHandler():
             if i < len(questions) - 1:
                 ids += '%3B'
 
-        final_url = api_url + ids + query_options
+        final_url = api_url + ids + query_options + key_param
+        print('final_url:', final_url)
         req = requests.get(final_url)
         if req.status_code != 200:
             print(req.status_code, '- Error while fetching data!')

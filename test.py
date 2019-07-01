@@ -1,12 +1,13 @@
 from query_gen import QueryGenerator
 from api_handling import SOHandler
+from config import API_KEY
 from ranking import overall_confidence
 
 query = input('Enter query: ')
 qgen = QueryGenerator()
 query_list = qgen.generate(query)
 
-so = SOHandler()
+so = SOHandler(API_KEY)
 answers = so.get_answers(query_list)
 answers = sorted(answers, key = lambda x: overall_confidence(query, x),
                  reverse = True)

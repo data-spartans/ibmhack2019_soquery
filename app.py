@@ -3,12 +3,13 @@ import urllib
 from flask import Flask, render_template, request, url_for
 
 from api_handling import SOHandler
+from config import API_KEY
 from query_gen import QueryGenerator
 from ranking import overall_confidence
 from utils import color_for_confidence
 
 qgen = QueryGenerator()
-so_handler = SOHandler()
+so_handler = SOHandler(API_KEY)
 
 app = Flask(__name__)
 
