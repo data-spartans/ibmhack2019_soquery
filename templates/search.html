@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Search Results</title>
+    <title>Top Answers</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
@@ -14,7 +14,7 @@
 </form>
 </div>
 {% for item in data %}
-<div class="answer-display" style="border: 3px solid {{ item[1] }}">
+<div class="answer-display" style="border-color: {{ item[1] }}">
     <div class="question" style="background: {{ item[1] }}">
         Q. {{ item[0].question_title }}
     </div>
