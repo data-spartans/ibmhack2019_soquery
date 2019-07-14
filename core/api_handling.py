@@ -69,6 +69,7 @@ class SOHandler():
             answers.append(CandidateAnswer(
                                 info = item, 
                                 question_title = qindex[item['question_id']][0].title,
+                                question_link = qindex[item['question_id']][0].link,
                                 relevance = qindex[item['question_id']][1]
                            ))
         return answers

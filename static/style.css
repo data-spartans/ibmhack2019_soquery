@@ -121,3 +121,8 @@ img {
     max-width: 95%;
     margin: 0 auto;
 }
+
+.question a {
+    text-decoration: none;
+    color: white;
+}
