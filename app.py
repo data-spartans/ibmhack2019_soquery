@@ -1,3 +1,4 @@
+import re
 import urllib
 
 from flask import Flask, render_template, request, url_for
@@ -36,7 +37,7 @@ def search():
                                     c1=(204, 0, 0), 
                                     c2=(0, 180, 204)) for x in answers]
     data = [(x, y) for x, y in zip(answers, colors)]
-    return render_template('search.html', data=data)
+    return render_template('search.html', data=data, sub=re.sub)
 
 if __name__ == '__main__':
     app.run(debug=True)

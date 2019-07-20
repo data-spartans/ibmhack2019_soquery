@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Top Answers</title>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
@@ -19,7 +20,7 @@
         Q. <a href={{ item[0].question_link }} target='_blank'> {{ item[0].question_title | safe }} </a>
     </div>
     <div class="answer">
-        {{ item[0].body | safe }}
+        {{ sub('<\s*code\s*>', '<code class="prettyprint">', item[0].body) | safe }}
     </div>
 </div>
 {% endfor %}
