@@ -3,12 +3,25 @@
 <head>
     <title>Top Answers</title>
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
+    <script type="text/javascript">
+    function show_hide(btn) {
+        btnpp = btn.parentNode.parentNode;
+        ans_el = btnpp.getElementsByClassName("answer")[0];
+        if(ans_el.hidden === true) {
+            ans_el.hidden = false;
+            btn.innerHTML = "-";
+        } else {
+            ans_el.hidden = true;
+            btn.innerHTML = "+";
+        }
+    }
+    </script>
 </head>
 <body>
 <div class="search">
 <form action="/search">
-  <input name="query" type="text" class="searchTerm" placeholder="Enter your query!"/>
+  <input name="query" type="text" class="searchTerm" placeholder="Enter your query!" value="{{ query }}"/>
   <button type="submit" class="searchButton">
     <b class="query-search">Search</b>
   </button>
@@ -17,7 +30,8 @@
 {% for item in data %}
 <div class="answer-display" style="border-color: {{ item[1] }}">
     <div class="question" style="background: {{ item[1] }}">
-        Q. <a href={{ item[0].question_link }} target='_blank'> {{ item[0].question_title | safe }} </a>
+        Q. <a href="{{ item[0].question_link }}" target="_blank"> {{ item[0].question_title | safe }} </a>
+        <button class="show-hide" onclick="show_hide(this)"> - </button>
     </div>
     <div class="answer">
         {{ sub('<\s*code\s*>', '<code class="prettyprint">', item[0].body) | safe }}

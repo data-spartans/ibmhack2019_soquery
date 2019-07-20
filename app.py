@@ -37,7 +37,7 @@ def search():
                                     c1=(204, 0, 0), 
                                     c2=(0, 180, 204)) for x in answers]
     data = [(x, y) for x, y in zip(answers, colors)]
-    return render_template('search.html', data=data, sub=re.sub)
+    return render_template('search.html', data=data, sub=re.sub, query=query)
 
 if __name__ == '__main__':
     app.run(debug=True)
