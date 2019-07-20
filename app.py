@@ -9,6 +9,8 @@ from core.query_gen import QueryGenerator
 from core.ranking import overall_confidence
 from utils import color_for_confidence
 
+NUMBER_OF_ANSWERS = 10
+
 qgen = QueryGenerator()
 so_handler = SOHandler(API_KEY)
 
@@ -28,12 +30,12 @@ def search():
     answers = sorted(answers, key=lambda x: x.confidence, reverse = True)
     if len(answers) == 0:
         return home(not_found=True)
-    if len(answers) > 5:
-        answers = answers[:5]
+    if len(answers) > NUMBER_OF_ANSWERS:
+        answers = answers[:NUMBER_OF_ANSWERS]
     for answer in answers:
         answer.fetch_body()
     colors = [color_for_confidence(x.confidence, 
-                                    thresh=700, 
+                                    thresh=6000,
                                     c1=(204, 0, 0), 
                                     c2=(0, 180, 204)) for x in answers]
     data = [(x, y) for x, y in zip(answers, colors)]

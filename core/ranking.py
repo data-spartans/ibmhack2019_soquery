@@ -37,10 +37,10 @@ def overall_confidence(query, candidate):
     scr = int(candidate.info['score'])
     acc = None
 
-    # we take acceptance of answer being equivalent to 20 upvotes
-    if candidate.info['is_accepted'] == 'true': acc = 20
+    # we take acceptance of answer being equivalent to 50 upvotes
+    if candidate.info['is_accepted'] == 'true': acc = 50
     else: acc = 0
     
     # similarity to original query is highly valued
-    return (scr + acc) * (sim + 1/rel) + 500 * sim
+    return (scr + acc) * (sim + 1/rel) + 10000 * sim
 
