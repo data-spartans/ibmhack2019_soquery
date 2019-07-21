@@ -6,6 +6,15 @@
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
 <body onload="updateSliderVal()">
+{% if error or not_found %}
+<p class="error">
+    {% if error %}
+        Sorry! Some error occured while fetching answers!
+    {% elif error %}
+        Sorry! We could not find any results!
+    {% endif %}
+</p>
+{% endif %}
 <div class="wrap">
     <img src="{{url_for('static', filename='logo.png')}}" alt="SOHunter Logo"/>
     <div class="search">

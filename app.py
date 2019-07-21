@@ -25,12 +25,15 @@ def search():
         return render_template('home.html')
     n_ans = int(request.args.get('n_ans'))
     query_list = qgen.generate(query)
-    answers = so_handler.get_answers(query_list)
+    try:
+        answers = so_handler.get_answers(query_list)
+    except:
+        return render_template('home.html', error=True)
     for answer in answers:
         answer.confidence = overall_confidence(query, answer)
     answers = sorted(answers, key=lambda x: x.confidence, reverse = True)
     if len(answers) == 0:
-        return home(not_found=True)
+        return render_template('home.html', not_found=True)
     if len(answers) > n_ans:
         answers = answers[:n_ans]
     for answer in answers:
