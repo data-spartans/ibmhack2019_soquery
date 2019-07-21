@@ -6,6 +6,8 @@ This was created as an entry for the [IBM Hack Challenge](https://www.ibm.com/in
 
 **All the files for the challenge (Undertaking, Ideation, presentation, and demo video) are inside the _submission\_docs folder_.**
 
+![demo](demo.gif)
+
 ## Features
 
 * Allows you to quickly get the top k answers to any query.
@@ -20,7 +22,7 @@ Try the online version [here](https://sohunter.herokuapp.com).
 
 To run the app locally, you need to first clone this repository with:
 
-    $ git clone https://github.com/teamtyrants/ibmhack2019_soquery
+    $ git clone https://github.com/data-spartans/ibmhack2019_soquery
 
 or download it as a zip.
 
