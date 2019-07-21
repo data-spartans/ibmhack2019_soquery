@@ -40,8 +40,11 @@ class SOHandler():
         # to support the method that fetches answers to a question.
         # So, we need to make requests directly to the API
         answers = []
+        answer_ids = set()
         api_url = 'https://api.stackexchange.com/2.2/questions/'
-        query_options = '/answers?order=desc&sort=votes&site=stackoverflow'
+        query_options1 = '/answers?order=desc&sort=votes&site=stackoverflow'
+        query_options2 = '/answers?order=desc&sort=activity&site=stackoverflow'
+        # ^ We need to to get sort in different ways to prevent outliers
         key_param = ''
         if self.api_key:
             key_param='&key=%s' % (self.api_key)
@@ -58,18 +61,42 @@ class SOHandler():
             if i < len(questions) - 1:
                 ids += '%3B'
 
-        final_url = api_url + ids + query_options + key_param
-        req = requests.get(final_url)
-        if req.status_code != 200:
-            print(req.status_code, '- Error while fetching data!')
-            return []
-        data = req.json()
+        final_url1 = api_url + ids + query_options1 + key_param
+        final_url2 = api_url + ids + query_options2 + key_param
+        req1 = requests.get(final_url1)
+        req2 = requests.get(final_url2)
 
-        for item in data['items']:
-            answers.append(CandidateAnswer(
-                                info = item, 
-                                question_title = qindex[item['question_id']][0].title,
-                                question_link = qindex[item['question_id']][0].link,
-                                relevance = qindex[item['question_id']][1]
-                           ))
+        if req1.status_code == 200:
+            data1 = req1.json()
+            for item in data1['items']:
+                if item['answer_id'] not in answer_ids:
+                    answer_ids.add(item['answer_id'])
+
+                    # remove outlier scores:
+                    if int(item['score']) > 5000:
+                        item['score'] = 5000
+
+                    answers.append(CandidateAnswer(
+                                        info = item, 
+                                        question_title = qindex[item['question_id']][0].title,
+                                        question_link = qindex[item['question_id']][0].link,
+                                        relevance = qindex[item['question_id']][1]
+                                   ))
+
+        if req2.status_code == 200:
+            data2 = req2.json()
+            for item in data2['items']:
+                if item['answer_id'] not in answer_ids:
+                    answer_ids.add(item['answer_id'])
+
+                    # remove outlier scores:
+                    if int(item['score']) > 5000:
+                        item['score'] = 5000
+
+                    answers.append(CandidateAnswer(
+                                        info = item, 
+                                        question_title = qindex[item['question_id']][0].title,
+                                        question_link = qindex[item['question_id']][0].link,
+                                        relevance = qindex[item['question_id']][1]
+                                   ))
         return answers

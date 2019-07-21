@@ -7,12 +7,17 @@ def jaccard_similarity(t1, t2):
 
     Returns similarity measure between 0 and 1
     '''
+    # Besides tokenizing, it will be useful to split on dashes(-)
+    t1 = t1.replace('-', ' ')
+    t2 = t2.replace('-', ' ')
+
     # First stem the words in the strings, 
     # then convert to set and take intersection
     ps = PorterStemmer()
+
     words1 = word_tokenize(t1.lower())
     words2 = word_tokenize(t2.lower())
-    
+
     words1 = [ps.stem(w) for w in words1]
     words2 = [ps.stem(w) for w in words2]
 
