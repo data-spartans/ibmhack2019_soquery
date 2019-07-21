@@ -1,19 +1,22 @@
 <html>
 <head>
-<title>SOHunter</title>
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
-<link rel="icon" type="image/png" href="icon.png"/>
-<style>
-</style>
+    <title>SOHunter</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+    <link rel="icon" type="image/png" href="icon.png"/>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
-<body>
+<body onload="updateSliderVal()">
 <div class="wrap">
     <div class="search">
         <form action="/search">
             <input name="query" type="text" class="searchTerm" placeholder="Enter your query!"/>
-                <button type="submit" class="searchButton">
-                    <b class="query-search">Search</b>
-                </button>
+            <button type="submit" class="searchButton">
+                <b class="query-search">Search</b>
+            </button>
+            <div class="slidecontainer">
+                <label for="myRange"> How many answers? <span id="output"></span></label>
+                <input oninput="updateSliderVal()" name="n_ans" type="range" min="1" max="20" value="5" class="slider" id="myRange"/>
+            </div>
         </form>
     </div>
 </div>

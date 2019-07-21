@@ -4,27 +4,19 @@
     <title>Top Answers</title>
     <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}"/>
-    <script type="text/javascript">
-    function show_hide(btn) {
-        btnpp = btn.parentNode.parentNode;
-        ans_el = btnpp.getElementsByClassName("answer")[0];
-        if(ans_el.hidden === true) {
-            ans_el.hidden = false;
-            btn.innerHTML = "-";
-        } else {
-            ans_el.hidden = true;
-            btn.innerHTML = "+";
-        }
-    }
-    </script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
-<body>
+<body onload="updateSliderVal()">
 <div class="search">
 <form action="/search">
   <input name="query" type="text" class="searchTerm" placeholder="Enter your query!" value="{{ query }}"/>
   <button type="submit" class="searchButton">
     <b class="query-search">Search</b>
   </button>
+  <div class="slidecontainer">
+      <label for="myRange"> How many answers? <span id="output"></span></label>
+      <input oninput="updateSliderVal()" name="n_ans" type="range" min="1" max="20" value="{{ n_ans }}" class="slider" id="myRange"/>
+  </div>
 </form>
 </div>
 {% for item in data %}

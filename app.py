@@ -9,8 +9,6 @@ from core.query_gen import QueryGenerator
 from core.ranking import overall_confidence
 from utils import color_for_confidence
 
-NUMBER_OF_ANSWERS = 10
-
 qgen = QueryGenerator()
 so_handler = SOHandler(API_KEY)
 
@@ -23,6 +21,9 @@ def home(not_found=False):
 @app.route("/search")
 def search():
     query = request.args.get('query')
+    if query == '':
+        return render_template('home.html')
+    n_ans = int(request.args.get('n_ans'))
     query_list = qgen.generate(query)
     answers = so_handler.get_answers(query_list)
     for answer in answers:
@@ -30,8 +31,8 @@ def search():
     answers = sorted(answers, key=lambda x: x.confidence, reverse = True)
     if len(answers) == 0:
         return home(not_found=True)
-    if len(answers) > NUMBER_OF_ANSWERS:
-        answers = answers[:NUMBER_OF_ANSWERS]
+    if len(answers) > n_ans:
+        answers = answers[:n_ans]
     for answer in answers:
         answer.fetch_body()
     colors = [color_for_confidence(x.confidence, 
@@ -39,7 +40,11 @@ def search():
                                     c1=(204, 0, 0), 
                                     c2=(0, 180, 204)) for x in answers]
     data = [(x, y) for x, y in zip(answers, colors)]
-    return render_template('search.html', data=data, sub=re.sub, query=query)
+    return render_template('search.html',
+                            data=data,
+                            sub=re.sub,
+                            query=query,
+                            n_ans=n_ans)
 
 if __name__ == '__main__':
     app.run(debug=True)
