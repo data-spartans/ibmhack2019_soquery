@@ -16,19 +16,19 @@ This was created as an entry for the [IBM Hack Challenge](https://www.ibm.com/in
 
 ## Instructions to Run
 
-You can try an online instance [here](https://sohunter.herokuapp.com).
+Try the online version [here](https://sohunter.herokuapp.com).
 
 To run the app locally, you need to first clone this repository with:
 
-    git clone https://github.com/teamtyrants/ibmhack2019_soquery
+    $ git clone https://github.com/teamtyrants/ibmhack2019_soquery
 
 or download it as a zip.
 
 Once in the repository directory, install the required python packages with:
 
-    pip3 install -r requirements.txt
+    $ pip3 install -r requirements.txt
 
-The NLTK packages required are listed in nltk.txt. They will be downloaded and setup automatically when you first run the app, but you can download them manually on running the following on a terminal:
+The NLTK packages required are listed in nltk.txt. They will be downloaded and setup automatically when you first run the app, but you can download them manually by running the following on a terminal:
 
     $ python3
     
@@ -45,23 +45,23 @@ If you have a StackExchange API key, you can specify that (as a string) instead 
 
 Run the app with:
 
-    python3 app.py
+    $ python3 app.py
 
 and access it on a browser at `localhost:5000`
 
-Additionally, if you want to try it out on the command line, run:
+Additionally, you can try it out on the command line with:
 
-    python3 cli.py
+    $ python3 cli.py
 
 ## Team
 
 * [Aditya Kumar](https://github.com/coderford)
-* [Hitesh Varma](https://github.com/HiteshVarma007)
+* [Hitesh Varma P.](https://github.com/HiteshVarma007)
 * [Rohan Banerjee](https://github.com/Rohan-Banerjee)
 
 ## Thanks
 
-This project is possible of the following pre-existing projects and their contributors:
+This project is possible because of the following pre-existing projects and their contributors:
 
 * [Py-stackexchange](https://github.com/lucjon/Py-StackExchange)
 * [NLTK](http://www.nltk.org/)
